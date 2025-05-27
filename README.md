@@ -1,6 +1,6 @@
-# Decomposed Key-Value Store
+# Go Key-Value Store
 
-This project implements a simple decomposed Key-Value store system consisting of two Go services that communicate via gRPC:
+This project implements a simple  Key-Value store system consisting of two Go services that communicate via gRPC:
 
 1. **REST API Server (Frontend)**: Exposes a JSON REST API for public interaction.
 2. **gRPC Key-Value Store Server (Backend)**: Implements the core Key-Value storage logic.
@@ -57,8 +57,8 @@ Before you begin, ensure you have the following installed:
 First, clone this repository:
 
 ```sh
-git clone https://github.com/your-username/decomposed-kv-store.git
-cd decomposed-kv-store
+git clone https://github.com/mbasha/grpc-kv-store.git
+cd grpc-kv-store
 ```
 
 Next, generate the gRPC code from the `.proto` file. You'll need `protoc` and `protoc-gen-go`, `protoc-gen-go-grpc`.
