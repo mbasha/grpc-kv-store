@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "github.com/mbasha/grpc-kv-store/kv-grpc-service/proto";
+
+package kv;
+
+service KeyValueStore {
+    rpc Store(KeyValue) returns (Response);
+    rpc Retrieve(Key) returns (Value);
+    rpc Delete(Key) returns (Response);
+}
+
+message KeyValue {
+    string key = 1;
+    string value = 2;
+}
+
+message Key {
+    string key = 1;
+}
+
+message Value {
+    string value = 1;
+}
+
+message Response {
+    string message = 1;
+}
