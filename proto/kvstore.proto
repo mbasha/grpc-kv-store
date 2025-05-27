@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "./;kvstore";
+
+package kvstore;
+
+// StoreRequest defines the request for storing a key-value pair.
+message StoreRequest {
+  string key = 1;
+  string value = 2;
+}
+
+// StoreResponse defines the response after storing a key-value pair.
+message StoreResponse {
+  bool success = 1;
+}
+
+// RetrieveRequest defines the request for retrieving a value by key.
+message RetrieveRequest {
+  string key = 1;
+}
+
+// RetrieveResponse defines the response after retrieving a value.
+message RetrieveResponse {
+  string value = 1;
+  bool found = 2; // Indicates if the key was found
+}
+
+// DeleteRequest defines the request for deleting a key.
+message DeleteRequest {
+  string key = 1;
+}
+
+// DeleteResponse defines the response after deleting a key.
+message DeleteResponse {
+  bool success = 1;
+}
+
+// KVStore service defines the RPC methods for Key-Value operations.
+service KVStore {
+  rpc Store (StoreRequest) returns (StoreResponse);
+  rpc Retrieve (RetrieveRequest) returns (RetrieveResponse);
+  rpc Delete (DeleteRequest) returns (DeleteResponse);
+}
