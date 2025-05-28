@@ -107,16 +107,20 @@ docker build -t kvstore-rest-server -f docker/rest-server/Dockerfile .
 ## Running the Services
 
 You need to run the gRPC server first, and then the REST API server, linking them via Docker's networking.
-
-1. **Run the gRPC Server:**
+1. **Create the custom network bridge:**
     ```sh
-    docker run -d --name kvstore-grpc-server --network host kvstore-grpc-server
+      docker network create kvstore-net
+    ```
+
+2. **Run the gRPC Server:**
+    ```sh
+    docker run -d --name kvstore-grpc-server --network kvstore-net kvstore-grpc-server
     ```
     - `--network host`: This makes the container use the host's network stack, allowing the REST server (and your host machine) to access it directly via `localhost`. In a production setup, you would typically use a custom Docker network.
 
-2. **Run the REST API Server:**
+3. **Run the REST API Server:**
     ```sh
-    docker run -d --name kvstore-rest-server -p 8080:8080 --network host kvstore-rest-server
+    docker run -d --name kvstore-rest-server -p 8080:8080 --network kvstore-net kvstore-rest-server
     ```
     - `-p 8080:8080`: Maps port 8080 on your host to port 8080 in the container, making the REST API accessible from your machine.
 

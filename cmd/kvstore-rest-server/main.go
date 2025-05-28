@@ -141,7 +141,7 @@ func main() {
 	// The gRPC server runs on localhost:50051 (as defined in its main.go).
 	// Using WithTransportCredentials(insecure.NewCredentials()) for simplicity;
 	// for production, use secure credentials (e.g., TLS).
-	conn, err := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial("kvstore-grpc-server:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Did not connect to gRPC server: %v", err)
 	}
