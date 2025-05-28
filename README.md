@@ -116,7 +116,6 @@ You need to run the gRPC server first, and then the REST API server, linking the
     ```sh
     docker run -d --name kvstore-grpc-server --network kvstore-net kvstore-grpc-server
     ```
-    - `--network host`: This makes the container use the host's network stack, allowing the REST server (and your host machine) to access it directly via `localhost`. In a production setup, you would typically use a custom Docker network.
 
 3. **Run the REST API Server:**
     ```sh
