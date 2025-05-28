@@ -198,10 +198,3 @@ To stop and remove the Docker containers:
 docker stop kvstore-rest-server kvstore-grpc-server
 docker rm kvstore-rest-server kvstore-grpc-server
 ```
-
-## Extensibility and Modularity
-
-- **Modular Design**: The separation into two distinct services (REST API frontend and gRPC backend) promotes modularity. The core Key-Value logic is encapsulated within the gRPC server, making it reusable and independently deployable.
-- **Protocol Agnostic Backend**: By using gRPC, the backend service is not tied to the REST API. You could easily build other types of clients (e.g., a CLI tool, another microservice) that communicate directly with the gRPC server without needing to go through the REST API.
-- **Storage Layer**: The current gRPC server uses an in-memory map for storage. This can be easily swapped out for a persistent storage solution (e.g., Redis, PostgreSQL, Cassandra) by modifying only the `kvStoreServer` implementation in `cmd/kvstore-grpc-server/main.go` without affecting the REST API server's logic or interface.
-- **Transport Layer**: The REST API server communicates with the backend via gRPC.
