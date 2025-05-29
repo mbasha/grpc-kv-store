@@ -48,7 +48,7 @@ The Key-Value store supports the following operations through its JSON REST API:
 
 Before you begin, ensure you have the following installed:
 
-- [Go](https://golang.org/doc/install) (version 1.18 or higher)
+- [Go](https://golang.org/doc/install) (version 1.24 or higher)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Git](https://git-scm.com/downloads) (to clone the repository)
 
