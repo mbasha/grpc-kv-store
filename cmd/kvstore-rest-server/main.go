@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	pb "grpc-kv-store/proto" // Import the generated protobuf package
+	pb "grpc-kv-store/proto" // Generated protobuf package
 
-	"github.com/gorilla/mux" // Popular HTTP router
+	"github.com/gorilla/mux" // For routing HTTP requests
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure" // For insecure connection to gRPC server
 )
@@ -102,7 +102,8 @@ func (s *restAPIServer) deleteHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	key := vars["key"]
 
-	ctx, cancel := context.WithTimeout(r.Context(), time.Second) // Set a timeout for gRPC call
+	// Set a timeout for gRPC call
+	ctx, cancel := context.WithTimeout(r.Context(), time.Second)
 	defer cancel()
 
 	// Call the gRPC Delete method
@@ -139,13 +140,15 @@ func jsonResponse(w http.ResponseWriter, statusCode int, data interface{}) {
 func main() {
 	// Establish a gRPC connection to the backend server.
 	// The gRPC server runs on localhost:50051 (as defined in its main.go).
-	// Using WithTransportCredentials(insecure.NewCredentials()) for simplicity;
-	// for production, use secure credentials (e.g., TLS).
+	// Using WithTransportCredentials(insecure.NewCredentials()) for demo purposes;
+	// in a real-world application, especially if this is exposed to the internet,
+	// you should use secure credentials (e.g., TLS).
 	conn, err := grpc.Dial("kvstore-grpc-server:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Did not connect to gRPC server: %v", err)
 	}
-	defer conn.Close() // Close the connection when main exits
+	// Close the connection when main exits
+	defer conn.Close()
 
 	// Create a new gRPC client for the KVStore service.
 	grpcClient := pb.NewKVStoreClient(conn)
